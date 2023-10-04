@@ -22,3 +22,23 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# settings
+**/.settings/**
+**/.idea/**
+
+# node modules
+**/node_modules/**
+
+# react build directory
+**/frontend/build/**
+
+# react build directory
+/target/**
+.project
+.classpath
+/target/
+/bin/
+.factorypath
+/.idea/
+/.metadata/
