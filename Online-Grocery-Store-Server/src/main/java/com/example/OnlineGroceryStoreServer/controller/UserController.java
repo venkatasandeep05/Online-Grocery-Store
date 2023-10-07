@@ -7,6 +7,7 @@ import com.example.OnlineGroceryStoreServer.payload.RegisterUserPayload;
 import com.example.OnlineGroceryStoreServer.repo.RoleRepository;
 import com.example.OnlineGroceryStoreServer.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,9 @@ public class UserController
     @Autowired
     RoleRepository roleRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @PostMapping("/register")
     public String registerUser(@RequestBody RegisterUserPayload registeredUser) {
         try
@@ -33,7 +37,7 @@ public class UserController
             Users newUser=new Users();
             newUser.setName(registeredUser.getName());
             newUser.setEmail(registeredUser.getEmail());
-            newUser.setPassword(registeredUser.getPassword());
+            newUser.setPassword(passwordEncoder.encode(registeredUser.getPassword()));
             newUser.setRoles(new HashSet<>(Arrays.asList(roleRepository.findByName(ERole.ROLE_USER))));
             userRepository.save(newUser);
             return "User Registered Successfully";
