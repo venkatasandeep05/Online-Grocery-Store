@@ -7,12 +7,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Getter
-@Setter
 public class UserPrincipal implements UserDetails
 {
     private String userName;
@@ -28,7 +27,9 @@ public class UserPrincipal implements UserDetails
         this.name = name;
         this.authorities = authorities;
         this.password=password;
+
     }
+
 
     public static UserDetails build(Users user)
     {
@@ -44,8 +45,9 @@ public class UserPrincipal implements UserDetails
     }
 
     @Override
-    public String getPassword() {
-        return getPassword();
+    public String getPassword()
+    {
+        return password;
     }
 
     @Override
