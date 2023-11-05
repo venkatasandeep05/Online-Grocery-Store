@@ -20,5 +20,5 @@ public class Cart
     private long id;
     private Long productId;
     private long userId;
-//    private int quantity;
+//  private int quantity;
 }

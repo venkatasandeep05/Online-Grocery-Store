@@ -43,7 +43,7 @@ public class ProductController
            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ProductNotFoundException(name));
         }
     }
-    @GetMapping("/getProductById/{id}}")
+    @GetMapping("/getProductById/{id}")
     public ResponseEntity<?> getProductById(@PathVariable Long id)
     {
         try {

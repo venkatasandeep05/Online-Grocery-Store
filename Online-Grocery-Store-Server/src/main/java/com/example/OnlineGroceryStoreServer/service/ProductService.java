@@ -29,7 +29,7 @@ public class ProductService
 
     public List<Products> getProductByName(String name) throws Exception
     {
-      List<Products> productsList=productRepository.findByNameIgnoreCaseContaining(name);
+      List<Products> productsList=productRepository.findByProductNameIgnoreCaseContaining(name);
       if(productsList.size()!=0)
           return productsList;
       else
