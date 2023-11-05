@@ -5,6 +5,7 @@ import com.example.OnlineGroceryStoreServer.payload.AddToCart;
 import com.example.OnlineGroceryStoreServer.payload.RemoveFromCart;
 import com.example.OnlineGroceryStoreServer.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +40,15 @@ public class CartController
                   return ResponseEntity.ok("Product removed from cart");
             }catch(Exception e) {
                   return ResponseEntity.badRequest().body(e.getMessage());
+            }
+      }
+      @RequestMapping("getCartsByUserId/{id}")
+      public ResponseEntity<?> getCartsByUserId(@PathVariable Long id) {
+            try {
+                  List<Cart> obj = cartService.getCartByUserId(id);
+                  return ResponseEntity.ok(obj);
+            }catch(Exception e) {
+                  return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Exception(e.getMessage()));
             }
       }
 

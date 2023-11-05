@@ -42,7 +42,7 @@ public class CartService
 
     }
 
-    private List<Cart> getCartByUserId(Long userId)
+    public List<Cart> getCartByUserId(Long userId)
     {
         try {
             Optional<List<Cart>> cart = cartRepository.findByUserId(userId);
@@ -63,4 +63,11 @@ public class CartService
             throw new RuntimeException(e.getMessage());
         }
     }
+
+    public void removeAllCartByUserId(long userId)
+    {
+        cartRepository.deleteByUserId(userId);
+
+    }
+    
 }
