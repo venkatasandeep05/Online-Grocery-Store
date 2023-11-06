@@ -79,7 +79,7 @@ public class AuthController
         }
         catch (BadCredentialsException e)
         {
-            throw new Exception("Incorrect UserName or Password");
+            return ResponseEntity.badRequest().body("Incorrect UserName or Password");
         }
 
     }

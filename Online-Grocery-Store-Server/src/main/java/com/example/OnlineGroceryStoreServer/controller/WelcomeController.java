@@ -34,14 +34,9 @@ public class WelcomeController
     private String adminPassword;
 
 
-    @GetMapping("/hello")
-    public String helloMethod()
-    {
-        return "Welcome";
-    }
 
     @GetMapping("/welcome")
-    public String setDefaultValuesInDB()
+    public String setDefaultValuesInDB() throws Exception
     {
         try{
             createDefaultRoles();
