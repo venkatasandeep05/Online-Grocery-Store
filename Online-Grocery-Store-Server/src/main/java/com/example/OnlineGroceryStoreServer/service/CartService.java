@@ -9,6 +9,7 @@ import com.example.OnlineGroceryStoreServer.repo.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,8 @@ public class CartService
 
             Products product = productRepository.findById(addToCart.getProductId()).
                     orElseThrow(() -> new Exception("Product Not Found"));
-            if (product != null) {
+            Optional<Cart> cartExists=cartRepository.findByUserIdAndProductId(addToCart.getUserId(),addToCart.getProductId());
+            if (product != null && cartExists.isEmpty()) {
                 Cart cart = new Cart();
                 cart.setProductId(addToCart.getProductId());
                 cart.setUserId(addToCart.getUserId());
@@ -55,11 +57,16 @@ public class CartService
         }
     }
 
+    @Transactional
     public void removeCartByUserIdAndProductId(RemoveFromCart removeFromCart) throws Exception
     {
+        Optional<Cart> cartExists=cartRepository.findByUserIdAndProductId(removeFromCart.getUserId(),removeFromCart.getProductId());
+        if(cartExists.isEmpty())
+            throw new Exception("Product Not found in users cart");
         try {
             cartRepository.deleteByUserIdAndProductId(removeFromCart.getUserId(), removeFromCart.getProductId());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException(e.getMessage());
         }
     }

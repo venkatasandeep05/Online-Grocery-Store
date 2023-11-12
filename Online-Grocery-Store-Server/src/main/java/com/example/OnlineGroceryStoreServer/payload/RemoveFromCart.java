@@ -11,4 +11,12 @@ public class RemoveFromCart
 {
     private Long userId;
     private Long productId;
+
+    @Override
+    public String toString() {
+        return "RemoveFromCart{" +
+                "userId=" + userId +
+                ", productId=" + productId +
+                '}';
+    }
 }

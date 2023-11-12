@@ -36,6 +36,7 @@ public class CartController
       @PostMapping("/removeProductFromCart")
       public ResponseEntity<?> removeCartwithProductId(@RequestBody RemoveFromCart removeFromCart) {
             try {
+                  System.out.println(removeFromCart);
                   cartService.removeCartByUserIdAndProductId(removeFromCart);
                   return ResponseEntity.ok("Product removed from cart");
             }catch(Exception e) {
